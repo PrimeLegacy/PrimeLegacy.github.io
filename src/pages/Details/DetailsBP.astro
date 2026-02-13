@@ -14,13 +14,13 @@ const {
 } = Astro.props;
 ---
 
-<Layout title = "Page Template">
+<Layout title = {title}>
 </Layout>
 
 <body>
     <Sidebar weblink ="/?scroll=Game-Jams" />
     <div class="tab">
-        <h2 style="margin-left: 16px;">Page Template</h2>
+        <h2 style="margin-left: 16px;">{title}</h2>
         <div class="tab-buttons">
         {tabs.map((tab: string, index: number) => (
             <button data-tab={tab} class={index === 0 ? 'active' : ''}>{tab}</button>
