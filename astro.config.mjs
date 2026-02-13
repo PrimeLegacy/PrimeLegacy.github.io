@@ -3,6 +3,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://PrimeLegacy.github.io',
-    base: '/PrimeLegacy.github.io/'
+    site: 'https://PrimeLegacy.github.io'
 });
