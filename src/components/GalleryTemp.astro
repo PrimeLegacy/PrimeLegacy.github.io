@@ -1,0 +1,22 @@
+---
+import GalleryElement from '../components/GalleryElement.astro';
+
+// Variables
+const {
+    title = "Gallery Title",
+    description = "This is the description of the gallery section of the portfolio website.",
+    images = []
+} = Astro.props;
+---
+    
+    <div>
+        <h3>{title}</h3>
+        <p>{description}</p>
+        <ul class="projects-grid">
+            {images.map((image : { description: string; link: string;}) => (
+                <li>
+                    <GalleryElement description={image.description} link={image.link}/>
+                </li>
+            ))}
+        </ul>
+    </div>

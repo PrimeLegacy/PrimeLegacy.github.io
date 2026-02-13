@@ -1,0 +1,38 @@
+---
+
+
+// Variables
+const {
+    preImageTitle = "Image Title",
+    preImageDescription = "This is the pre-image description of the portfolio website.",
+    image = "path/to/image1.jpg",
+    imageSpecifier = "Image specifier",
+    postImageDescription = "This is the post-image description of the portfolio website."
+} = Astro.props;
+---
+
+<div class="description">
+        <h3>{preImageTitle}</h3>
+        <p class="preImageDescription">{preImageDescription}</p>
+        <img class="description-image" src={image} alt={`Image`} />
+        <p class ="imageSpecifier">{imageSpecifier}</p>
+        <p class="postImageDescription">{postImageDescription}</p>
+</div>
+
+<style>
+    .description-image {
+        width: 100%;
+        border-radius: 8px;
+    }
+    .preImageDescription {
+        margin-bottom: 24px;
+    }
+    .postImageDescription {
+        margin-bottom: 24px;
+    }
+    .imageSpecifier {
+        margin-bottom: 24px;
+        font-size: 0.8rem;
+        color: #cbd5e1;
+    }
+</style>

@@ -1,0 +1,302 @@
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-VariableFont_opsz,wght.ttf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SpaceGrotesk';
+    src: url('/fonts/SpaceGrotesk-VariableFont_wght.ttf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quantico-Regular';
+    src: url('/fonts/Quantico-Regular.ttf');
+}
+
+h1{
+    font-family: 'inter', sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #f3f4f6;
+}
+h2{
+    font-family: 'Quantico-Regular', sans-serif;
+    font-size: 3rem;
+}
+h3{
+    font-family: 'Quantico-Regular', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 8px 0;
+}
+p{
+    font-family: 'inter';
+    font-size: 1rem;
+    color: #cbcccf;
+}
+
+li{
+    font-family: 'inter';
+    font-size: 1.5rem;
+}
+
+li:hover{
+    list-style-type: none;
+}
+
+a{
+    color: #9fb3ff;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #606ea3;
+    text-decoration: underline;
+}
+
+button{
+    background-color: #1a1f2a;
+    color: #aab2c5;
+    z-index: 10;
+}
+.Quantico{
+    font-family: 'Quantico-Regular';
+}
+ 
+.big { font-size: 3rem;}
+.small { font-size: 0.8rem; color: #cbd5e1;}
+.center {text-align: center;}
+.date {font-size: 0.8rem; color: #8b93a7;}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: 20vh;
+    padding-bottom: 30vh;
+    padding-right: 20px;
+    max-width: 80px;
+}
+
+.VertContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-buttons{
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+    margin: 0;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #252b3a;
+}
+.tab{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 18vh;
+    margin-left: 120px;
+    margin-right: 80px;
+    margin-bottom: 5vh;
+    background-color: #161a22;
+    border-radius: 10px;
+    padding: 8px 0 0;
+    max-width: 1100px;
+    width: calc(100% - 200px);
+    align-items: stretch;
+}
+
+.tab-content{
+    display: none;
+    width: 100%;
+    background-color: #161a22;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.tab-content.active{
+    display: block;
+}
+
+.tab-buttons button.active {
+    background-color: #161a22;
+    color: #e2e8f0;
+    border-bottom: 2px solid #3b4252;
+}
+
+.tab-buttons button{
+    background-color:  transparent;
+    color: #9aa3b8;
+    border: none;
+    padding: 16px 6px 12px;
+    font-family: 'Quantico-Regular', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-buttons button:hover{
+    color: #cbd5e1;
+}
+
+.projects-grid{
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 20px;
+    max-width: 100%;
+}
+
+.projects-grid li{
+    margin: 0;
+    display: flex;
+}
+
+.intro{
+    margin: 18vh 0 24px 120px;
+    max-width: 900px;
+    padding: 0 16px 0 0;
+}
+
+.intro-kicker{
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.8rem;
+    color: #8b93a7;
+    margin: 0 0 12px;
+}
+
+.intro-title{
+    margin: 0 0 12px;
+    color: #f3f4f6;
+}
+
+.intro-text{
+    margin: 0;
+    max-width: 56ch;
+}
+
+.social-bar{
+    margin: 48px 80px 32px 120px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background-color: #1b202b;
+    border: 1px solid #252b3a;
+    color: #cbd5e1;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.social-link svg{
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+}
+
+.social-link:hover{
+    transform: translateY(-2px);
+    border-color: #3b4252;
+    color: #f3f4f6;
+    background-color: #202634;
+}
+
+@media (max-width: 1024px){
+    .tab{
+        margin-left: 96px;
+        margin-right: 40px;
+        width: calc(100% - 136px);
+        max-width: 900px;
+    }
+    .tab-buttons{
+        gap: 1.5rem;
+    }
+    .intro{
+        margin-left: 96px;
+        margin-right: 40px;
+    }
+    .social-bar{
+        margin-left: 96px;
+        margin-right: 40px;
+    }
+}
+
+@media (max-width: 768px){
+    .sidebar{
+        position: static;
+        height: auto;
+        max-width: none;
+        padding: 16px 0;
+    }
+    .VertContainer{
+        flex-direction: row;
+        justify-content: center;
+        gap: 24px;
+    }
+    .tab{
+        margin: 16px;
+        width: auto;
+        max-width: none;
+        border-radius: 12px;
+    }
+    .tab-buttons{
+        padding: 8px 16px 0;
+    }
+    .tab-buttons button{
+        font-size: 1.05rem;
+        padding: 12px 4px 10px;
+    }
+    .tab-content,
+    .tab-content.active{
+        padding: 16px;
+    }
+    .projects-grid{
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        max-width: none;
+    }
+    .intro{
+        margin: 16px;
+        padding: 0;
+    }
+    .social-bar{
+        margin: 32px 16px 24px;
+    }
+}
+
+@media (max-width: 480px){
+    h1{ font-size: 2.2rem; }
+    h2{ font-size: 2rem; }
+    .tab-buttons{
+        gap: 1rem;
+    }
+    .projects-grid{
+        grid-template-columns: 1fr;
+    }
+}

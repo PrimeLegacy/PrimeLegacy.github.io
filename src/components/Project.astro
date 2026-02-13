@@ -1,0 +1,86 @@
+---
+const {title = "Title",
+description = "Description",
+date = "Date",
+link = "#",
+thumbnail = "",
+tags = []} = Astro.props;
+---
+
+<a class="project-card" href={link}>
+  <img src={thumbnail} alt={`thumbnail for ${title}`} class="project-thumbnail" />
+  <div class="project-body">
+    <p class="project-date">{date}</p>
+    <h3 class="project-title">{title}</h3>
+    <p class="project-description">{description}</p>
+    <div class="project-tags">
+      {tags.map((tag: string) => (
+        <span class="project-tag">{tag}</span>
+      ))}
+    </div>
+  </div>
+</a>
+
+<style>
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      height: 90%;
+      width: 100%;
+      background-color: #1e232e;
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid #232a39;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(7, 12, 20, 0.35);
+      border-color: #344057;
+    }
+    .project-thumbnail {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background-color: #141821;
+    }
+    .project-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 0;
+      color: #f3f4f6;
+    }
+    .project-description {
+      font-size: 0.98rem;
+      margin: 0;
+      color: #cbd5e1;
+    }
+    .project-date {
+      font-size: 0.85rem;
+      color: #8b93a7;
+      margin: 0;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .project-tag{
+      font-family: 'Quantico-Regular', sans-serif;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      background-color: #374053;
+      padding: 4px 8px;
+      border-radius: 12px;
+      border: 1px solid #94a3b8;
+    }
+</style>

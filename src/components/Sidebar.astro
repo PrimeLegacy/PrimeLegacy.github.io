@@ -1,0 +1,27 @@
+---
+const { weblink = "/" } = Astro.props;
+---
+<body>
+    <div class = "sidebar">
+            		<a id="returnIcon" href={weblink} aria-label="LinkedIn">
+			<svg fill= currentColor version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34.344 34.343" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M34.344,19.168v9.754c0-5.144-4.17-9.312-9.312-9.312h-9.976v5.765l-9.977-9.977l9.977-9.977v4.435h9.976 C30.174,9.857,34.344,14.026,34.344,19.168z M9.977,8.095V5.422L0,15.399l9.977,9.977v-2.674l-7.303-7.303L9.977,8.095z"></path> </g> </g></svg>
+</body>
+
+<style>
+#returnIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 16px;
+    margin-right: 16px;
+    color: currentColor;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+#returnIcon:hover {
+    transform: translateY(-2px);
+    color: #f3f4f6;
+}
+</style>

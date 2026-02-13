@@ -1,0 +1,229 @@
+---
+const {
+    name = "Name",
+    description = "Description",
+    jobTitle = "Job Title",
+    image = "path/to/image.jpg",
+    resumeImage = "path/to/Resumee.jpg",
+    resumeDownload = "path/to/Resumee.pdf",
+    resumeAlt = "Resumee preview",
+    skills = []
+} = Astro.props;
+---
+
+<div class="profile-grid" data-profile>
+    <div class="profile-card">
+        <div class="profile-header">
+            <img class="profile-avatar" src={image} alt={`${name} portrait`} />
+            <div class="profile-title">
+                <h1>{name}</h1>
+                <p class="profile-role">{jobTitle}</p>
+            </div>
+        </div>
+        <p class="profile-description">{description}</p>
+        {skills.length > 0 &&
+        <h3>Skills</h3>}
+        <div class="skills">
+            {skills.map((skill: string) => (
+                <span class="skill">{skill}</span>
+            ))}
+        </div>
+    </div>
+    <div class="resume-card">
+        <button class="resume-preview" type="button" aria-expanded="false" aria-label="Open resumee preview">
+            <img src={resumeImage} alt={resumeAlt} />
+        </button>
+        <a class="social-link resume-download" style="align-self: center;" href={resumeDownload} target="_blank" rel="noopener noreferrer" aria-label="Download resumee">
+            <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                <path d="M12 3c.55 0 1 .45 1 1v9.17l2.59-2.58a1 1 0 0 1 1.41 1.41l-4.3 4.3a1 1 0 0 1-1.4 0l-4.3-4.3a1 1 0 1 1 1.41-1.41L11 13.17V4c0-.55.45-1 1-1zM5 19c0-.55.45-1 1-1h12c.55 0 1 .45 1 1s-.45 1-1 1H6c-.55 0-1-.45-1-1z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="resume-overlay" data-resume-overlay hidden>
+    <div class="resume-overlay-inner" role="dialog" aria-modal="true">
+        <img src={resumeImage} alt={resumeAlt} />
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const profileRoot = document.querySelector<HTMLElement>('[data-profile]');
+        const previewButton = profileRoot?.querySelector<HTMLButtonElement>('.resume-preview');
+        const overlay = document.querySelector<HTMLElement>('[data-resume-overlay]');
+
+        if (!profileRoot || !previewButton || !overlay) {
+            return;
+        }
+
+        const openOverlay = () => {
+            overlay.hidden = false;
+            overlay.classList.add('is-open');
+            previewButton.setAttribute('aria-expanded', 'true');
+        };
+
+        const closeOverlay = () => {
+            overlay.hidden = true;
+            overlay.classList.remove('is-open');
+            previewButton.setAttribute('aria-expanded', 'false');
+        };
+
+        previewButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (overlay.classList.contains('is-open')) {
+                closeOverlay();
+            } else {
+                openOverlay();
+            }
+        });
+
+        overlay.addEventListener('click', closeOverlay);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && overlay.classList.contains('is-open')) {
+                closeOverlay();
+            }
+        });
+    });
+</script>
+
+<style>
+.profile-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.profile-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+}
+
+.profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 24px;
+    object-fit: cover;
+    border: 1px solid #252b3a;
+    background-color: #1b202b;
+}
+
+.profile-title h1 {
+    margin: 0 0 8px;
+}
+
+.profile-role {
+    margin: 0;
+    color: #9aa3b8;
+    font-size: 1.05rem;
+}
+
+.profile-description {
+    margin: 0;
+    max-width: 60ch;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill {
+    background-color: #1e232e;
+    color: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.resume-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.resume-preview {
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+}
+
+.resume-preview img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 14px;
+    border: 1px solid #252b3a;
+    box-shadow: 0 16px 32px rgba(10, 12, 18, 0.35);
+    display: block;
+}
+
+.resume-download {
+    width: 44px;
+    height: 44px;
+}
+
+.resume-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 10, 14, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 50;
+    cursor: zoom-out;
+}
+
+.resume-overlay[hidden] {
+    display: none;
+}
+
+.resume-overlay-inner {
+    max-width: min(920px, 92vw);
+    max-height: 90vh;
+    overflow: auto;
+}
+
+.resume-overlay-inner img {
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+    border: 1px solid #2a3142;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    .resume-card {
+        align-items: flex-start;
+    }
+    .resume-preview img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+    .profile-header {
+        grid-template-columns: 1fr;
+    }
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+    }
+}
+</style>

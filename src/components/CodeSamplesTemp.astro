@@ -1,0 +1,16 @@
+---
+const { title = "Code Samples", description = "This is the description of the code samples section.", codeSamples = [] } = Astro.props;
+---
+
+<div class="code-samples">
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <div class="code-samples-container">
+        {codeSamples.map((sample : { title: string; code: string; }, index: number) => (
+            <div class="code-sample">
+                <h3>{sample.title}</h3>
+                <pre><code>{sample.code}</code></pre>
+            </div>
+        ))}
+    </div>
+</div>

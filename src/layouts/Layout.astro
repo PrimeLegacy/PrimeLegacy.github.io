@@ -1,0 +1,31 @@
+---
+// component import
+import MainHead from './MainHead.astro';
+
+// style import
+import "../styles/globalStyle.css";
+
+// variables
+const { title = "Portfolio", description = "Work in Progress"} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<body style="background-color: #2d293a; color: #ced1d3;">
+	</body>
+</html>
+<MainHead {title} {description} />
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.tab-content {
+		display: none;
+	}
+	.tab-content.active {
+		display: block;
+	}
+</style>
