@@ -4,13 +4,12 @@ import Sidebar from '../../components/Sidebar.astro';
 import DescriptionTemp from '../../components/DescriptionTemp.astro';
 import Socials from '../../components/Socials.astro';
 import GalleryTemp from '../../components/GalleryTemp.astro';
-import CodeSamplesTemp from '../../components/CodeSamplesTemp.astro';
 // Variables
 
 const {
-    title = "Page Title",
-    description = "Page description goes here.",
-    tabs = ["Description", "Gallery"]
+    title = "Project Duality",
+    tabs = ["Description", "Gallery"],
+    description = "Project Duality is a cooperative 3D adventure puzzle game, developed in Unreal Engine 5. It is currently in development as my bachelor thesis project at the University of Applied Sciences Vorarlberg. This project was originally inspired by titles like It Takes Two and Split Fiction. The project goal is to make a interdependency among players perceptlible through the design of the mechanics."
 } = Astro.props;
 ---
 
@@ -27,10 +26,48 @@ const {
         ))}
         </div>
          <div class="tab-content active" id="Description">
-            <DescriptionTemp />
+            <p>{description}</p>
+            <DescriptionTemp preImageTitle="Multiplayer"
+            preImageDescription="The game is designed to be played cooperatively among two players. Connecting to a session is possible through Steam."
+            image="/images/PD/PDThumb.png"
+            imageSpecifier="Screenshot of the multiplayer gameplay of Project Duality."
+            postImageDescription="Multiplayer functionality is provided by the Advanced Sessions plugin. Its implementation has been problematic but informative. The main issue has been understanding its underlying functionality: What can be done, when can it be done, and what needs to be considered? There are many conditions to be met, just to be able to connect two players, travel worlds and disconnect properly. However, once this is understood, it seems comparatively simple in hindsight."
+            />
+            <DescriptionTemp preImageTitle="Moving Objects"
+            preImageDescription="How to move objects in a multiplayer environment, without causing desynchronizations, jittering or similar problems while physics are involved?"
+            image="/images/PD/MovingObject.png"
+            imageSpecifier="Screenshot of an object being moved in Project Duality."
+            postImageDescription="By letting the player hold a target-Vector where the carried object should be moved to. The server will consider all conditions and tell the object to move itself towards the target location with a fixed velocity. Making use of the physics system a jittering can be circumvented, since physics run predictive on the client but get corrected by the server."
+            />
+            <DescriptionTemp preImageTitle="Shrink / Enlarge"
+            preImageDescription="The players primary ability: One player has the ability to shrink objects, while the other can enlarge them."
+            image="/gifs/PD/ShrinkEnlargeSQ.gif"
+            imageSpecifier="GIF showing the shrink and enlarge mechanic."
+            postImageDescription="Only specific objects can be shrunk or enlarged. They have 3 states, small, medium and large. When the state changes, a OnRep function starts an linear interpolation to its new scale. To make use of this mechanic in puzzles, some pressure plates can only be triggered by objects of specific sizes."
+            />
+            <DescriptionTemp preImageTitle="Portals"
+            preImageDescription="The players secondary ability: The players can activate a portal attached to them, similar in concept and functionality to a movable black hole and its counterpart, a white hole."
+            image="/gifs/PD/PortalSQ.gif"
+            imageSpecifier="GIF showing the portal teleportation mechanic."
+            postImageDescription="Player one can open the black hole to consume objects, that will be ejected from the white hole, which is opened by player two. To add onto this ability and concept, the black hole / portal pulls objects towards itself, while the white hole / portal pushes them away."
+            />
+            <img class="description-image" src="/gifs/PD/PushPullSQ.gif" alt="GIF showing the Black and White hole push / pull dynamic"/>
+            <p class="imageSpecifier">GIF showing the Black and White hole push / pull dynamic.</p>
         </div>
         <div class="tab-content" id="Gallery">
-            <GalleryTemp/>
+            <GalleryTemp title=""
+            description=""
+            images = {[
+                {link: "/gifs/PD/ShrinkEnlargeSQ.gif", description: "Shrink and Enlarge mechanic demonstration"},
+                {link: "/gifs/PD/PortalSQ.gif", description: "Portal teleportation mechanic demonstration"},
+                {link: "/gifs/PD/PushSQ.gif", description: "Demonstration of the push dynamic of the black hole"},
+                {link: "/gifs/PD/PullSQ.gif", description: "Demonstration of the pull dynamic of the white hole"},
+                {link: "/images/PD/Pic2.png", description: "Screenshot of gameplay 1"},
+                {link: "/images/PD/Pic3.png", description: "Screenshot of gameplay 2"},
+                {link: "/images/PD/Pic4.png", description: "Screenshot of gameplay 3"},
+                {link: "/images/PD/Pic5.png", description: "Screenshot of gameplay 4"},
+                {link: "/images/PD/Pic6.png", description: "Screenshot of gameplay 5"}
+            ]}/>
             </div>
     </div>
     <Socials/>

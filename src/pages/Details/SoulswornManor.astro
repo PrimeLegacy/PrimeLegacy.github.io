@@ -4,13 +4,14 @@ import Sidebar from '../../components/Sidebar.astro';
 import DescriptionTemp from '../../components/DescriptionTemp.astro';
 import Socials from '../../components/Socials.astro';
 import GalleryTemp from '../../components/GalleryTemp.astro';
-import CodeSamplesTemp from '../../components/CodeSamplesTemp.astro';
 // Variables
 
 const {
-    title = "Page Title",
-    description = "Page description goes here.",
-    tabs = ["Description", "Gallery", "Code Samples"]
+    title = "Soulsworn Manor",
+    description = "Soulsworn Manor is a 3D terror runner made in Unreal Engine 5. As a group of 3 developers, we cooperated in making this school project a success. The game is set in a dark manor, where the player needs to collect a total of 5 souls and find an exit to win. Meanwhile a monster, the so called questing beast, is patrolling the area and hunts the player down. This game was created between March and June 2025 in the course 3D Game Project at the Polytechnic Institute of Leiria.",
+    videolink = "/videos/SWM_Trailer.mp4",
+    videoSpecifier ="Game Trailer for Soulsworn Manor, showcasing gameplay and atmosphere.",
+    tabs = ["Description", "Gallery"]
 } = Astro.props;
 ---
 
@@ -26,15 +27,59 @@ const {
             <button data-tab={tab} class={index === 0 ? 'active' : ''}>{tab}</button>
         ))}
         </div>
-         <div class="tab-content active" id="Description">
-            <DescriptionTemp />
+        <div class="tab-content active" id="Description">
+            <p>{description}</p>
+            <a href={videolink} target="_blank" rel="noopener noreferrer">
+                <video controls width="100%" style="margin-top: 16px;">
+                    <source src={videolink} type="video/mp4" />
+                </video>
+            </a>
+            <p class="imageSpecifier">{videoSpecifier}</p>
+            <DescriptionTemp preImageTitle="Interaction"
+            preImageDescription="A key aspect of this game is its interaction system. The player can interact with doors and collectables."
+            image="/gifs/SWM/Door Interaction_Final.gif"
+            imageSpecifier="GIF showcasing the door interaction."
+            postImageDescription="To ensure scalability, a interface was used to implement the interaction system. A interactionbox is attached to the player, whenever an object that implements the interface enters the box, it will be stored in an actor array. On leaving, it is removed again. When the player presses the interact button, the interface interact function is called on all actors within the array."
+            />
+            <DescriptionTemp preImageTitle="AI (State Tree)"
+            preImageDescription="The questing beast's behaviour is programmed using Unreal Engine's State Tree system. It has 3 general states: Patrol, Hunt and Rage."
+            image="/gifs/SWM/AI - Hunt_Final.gif"
+            imageSpecifier="GIF showing how the AI hunts down the player."
+            postImageDescription="The AI can open and close doors when patrolling. While in hunt or rage mode, it will break them instead. This however stalls it for a short moment. Once the player collects all 5 souls, the AI automatically enters rage mode, and is not only faster, but also knows his position at all times."
+            />
+            <DescriptionTemp preImageTitle="Random Item Distribution"
+            preImageDescription="Multiple Spawn locations for the collectable souls are pre-defined in the level. A Spawn controller assigns the actual collectables randomly among them."
+            image="/gifs/SWM/RandomItemDistribution.gif"
+            imageSpecifier="GIF demonstration of the random item distribution mechanic, during the pre-production phase."
+            postImageDescription=""
+            />
+            <DescriptionTemp preImageTitle="Escape Door and Level Transition"
+            preImageDescription="There are multiple escape doors placed in the level. One of them will be unlocked and activated, once the player has collected all souls. On entering it, the player wins and is given the option to return to the main menu."
+            image="/gifs/SWM/Level Transition_Final.gif"
+            imageSpecifier="GIF showing the active escape door and the level transition upon entering it."
+            postImageDescription=""
+            />
         </div>
         <div class="tab-content" id="Gallery">
-            <GalleryTemp/>
-            </div>
-        <div class="tab-content" id="Code Samples">
-            <CodeSamplesTemp/>
-            </div>
+            <GalleryTemp description = "Screenshots and GIFsfrom Soulsworn Manor, showcasing various mechanics."
+            images = {[
+                {link: "/gifs/SWM/Collection - Interaction_Final.gif", description: "Collection Interaction"},
+                {link: "/gifs/SWM/Door Interaction_Final.gif", description: "Door Interaction"},
+                {link: "/gifs/SWM/Interaction - StoryUI_Final.gif", description: "Interaction with story elements"},
+                {link: "/gifs/SWM/Interaction - Story v2_Final.gif", description: "Interaction with story elements "},
+                {link: "/gifs/SWM/Interaction - Story_Final.gif", description: "Interaction with story elements"},
+                {link: "/gifs/SWM/AI - Door Destruction_Final.gif", description: "AI - Door Destruction"},
+                {link: "/gifs/SWM/AI - Door Interactions_Final.gif", description: "AI - Door Interaction"},
+                {link: "/gifs/SWM/AI - Hunt_Final.gif", description: "AI - Hunting the player"},
+                {link: "/gifs/SWM/Level Transition_Final.gif", description: "Level Transition"},
+                {link: "/gifs/SWM/UI - Dead_Final.gif", description: "Player death"},
+                {link: "/gifs/SWM/UI-IngameMenu_Final.gif", description: "In-game Menu"},
+                {link: "/gifs/SWM/UI-Menu_Final.gif", description: "Main Menu"},
+                {link: "/gifs/SWM/RandomItemDistribution.gif", description: "Random Item Distribution"},
+                {link: "/images/SWM/SWM-Thumb.png", description: "Thumbnail of the Soulsworn Manor level"},
+                {link: "/images/SWM/SWM_ClassDiagram.png", description: "Class Diagram showing the classes present and their relations to each other"}
+                ]}/>
+        </div>
     </div>
     <Socials/>
 </body>
@@ -56,6 +101,6 @@ const {
 
 				document.getElementById(tab)?.classList.add('active');
       		});
-    	});
-});
+        });
+    });
 </script>
