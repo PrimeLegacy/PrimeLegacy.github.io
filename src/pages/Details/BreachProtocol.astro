@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import DescriptionTemp from '../../components/DescriptionTemp.astro';
+import Socials from '../../components/Socials.astro';
+import GalleryTemp from '../../components/GalleryTemp.astro';
+import CodeSamplesTemp from '../../components/CodeSamplesTemp.astro';
+// Variables
+
+const {
+    title = "Breach Protocol",
+    tabs = ["Description", "Gallery"]
+} = Astro.props;
+---
+
+<Layout title = {title}>
+</Layout>
+
+<body>
+    <Sidebar weblink ="/?scroll=Game-Jams" />
+    <div class="tab">
+        <h2 style="margin-left: 16px;">{title}</h2>
+        <div class="tab-buttons">
+        {tabs.map((tab: string, index: number) => (
+            <button data-tab={tab} class={index === 0 ? 'active' : ''}>{tab}</button>
+        ))}
+        </div>
+         <div class="tab-content active" id="Description">
+            <DescriptionTemp preImageTitle="Global Game Jam 2026" preImageDescription="This Game was created during the Global Game Jam 2026, following the theme of masks. As a team of 6 developers and an audio artist, we prototyped a Top-down 2D Multiplayer Game, set in a Space Station. Oxygen masks are spawned randomly across the map, and each player needs to collect one to survive - however there are less masks than players. To spice things up, there is another item, a taser, with which a player without a mask can steal anothers." 
+            image="/images/Breach/MultiplayerPic.png" imageSpecifier="Multiplayer gameplay in Breach Protocol, showcasing the top-down perspective and the oxygen masks."
+            postImageDescription="The players, can connect to a host through his ip, if they are within the same network. In later iterations, we plan to migrate this connection process to steam so that a LAN connection is no longer required."/>
+        </div>
+        <div class="tab-content" id="Gallery">
+            <GalleryTemp description = "Gallery of screenshots from Breach Protocol. Screenshots will follow in the coming days."/>
+            </div>
+    </div>
+    <Socials/>
+</body>
+
+<!-- JavaScript for tab functionality -->
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab-buttons button');
+		const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
+
+		tabButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				const tab = button.dataset.tab as string;
+
+				tabButtons.forEach(btn => btn.classList.remove('active'));
+				tabContents.forEach(content => content.classList.remove('active'));
+
+				button.classList.add('active');
+
+				document.getElementById(tab)?.classList.add('active');
+      		});
+    	});
+});
+</script>

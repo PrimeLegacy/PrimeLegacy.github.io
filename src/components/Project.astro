@@ -8,7 +8,7 @@ tags = []} = Astro.props;
 ---
 
 <a class="project-card" href={link}>
-  <img src={thumbnail} alt={`thumbnail for ${title}`} class="project-thumbnail" />
+  {thumbnail != "" && <img src={thumbnail} alt={`thumbnail for ${title}`} class="project-thumbnail" />}
   <div class="project-body">
     <p class="project-date">{date}</p>
     <h3 class="project-title">{title}</h3>
