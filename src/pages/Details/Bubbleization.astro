@@ -24,18 +24,22 @@ const {
             <button data-tab={tab} class={index === 0 ? 'active' : ''}>{tab}</button>
         ))}
         </div>
-         <div class="tab-content active" id="Description">
-            <div class="tab-content active" id="Description">
-            <DescriptionTemp preImageTitle=""
-            preImageDescription=""
-            image=""
-            imageSpecifier=""
-            postImageDescription=""
+        <div class="tab-content active" id="Description">
+            <DescriptionTemp preImageTitle="Global Game Jam 2025"
+            preImageDescription="Made for and during the Global Game Jam 2025, this game follows the theme of Bubbles. As a team of 7 people, we prototyped it in Godot."
+            image="/images/Bubble/3.jpg"
+            imageSpecifier="Gameplay of Bubble-I-Zation."
+            postImageDescription="A player takes control of a group of settlers, telling them where to build roads. Roads connect the Hub with resource nodes. These ressources are needed for more streets, bigger biosphere hubs and the survival of the settlers. Once oxygen reaches zero, the game is lost. "
             />
         </div>
         <div class="tab-content" id="Gallery">
-            <GalleryTemp/>
-            </div>
+            <GalleryTemp title ="Gallery" description="Screenshots from Bubble-I-Zation, giving a glimpse of the gameplay created during the gamejam." images= {[ 
+                { link:"/images/Bubble/BubbleThumb.jpg", description:"Titlescreen." },
+                { link:"/images/Bubble/1.jpg", description:"Gameplay Screenshot, high field of view." },
+                { link:"/images/Bubble/2.jpg", description:"Gameplay Screenshot, showing construction." },
+                { link:"/images/Bubble/3.jpg", description:"Gameplay Screenshot, focused on the hub." },
+                { link:"/images/Bubble/4.jpg", description:"Game-Over screen." }]} />
+        </div>
     </div>
     <Socials/>
 </body>

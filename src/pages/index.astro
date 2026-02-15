@@ -38,8 +38,8 @@ import Socials from '../components/Socials.astro';
 	<div class="tab-content" id="mechanics" hidden>
 		<h2>Mechanics and Systems</h2>
 		<ul class="projects-grid">
-			<li><Project title="Navigation Bar" description="Compass bar including markers for game UI." date="October 2025" link="#" thumbnail="/images/Mechanics/Navigation.png" tags={["UE","C++", "Slate", "UI"]}/></li>
-			<li><Project title="Smartphone System" description="In-game smartphone UI hosting multiple functionalities." date="September 2025" link="#" thumbnail="/images/Mechanics/Smartphone.png" tags={["UE","Blueprint", "CommonUI"]}/></li>
+			<li><Project title="Navigation Bar" description="Compass bar including markers for game UI." date="October 2025" link="/Details/NavigationBar" thumbnail="/images/Mechanics/Navigation.png" tags={["UE","C++", "Slate", "UI"]}/></li>
+			<li><Project title="Smartphone System" description="In-game smartphone UI hosting multiple functionalities." date="September 2025" link="/Details/SmartphoneSystem" thumbnail="/images/Mechanics/Smartphone.png" tags={["UE","Blueprint", "CommonUI"]}/></li>
 		<!--- 
 			<li><Project title="Junk loading" description="Compartmentalization of background elements, coupled with dynamic loading and unloading." date="September 2025" link="#" tags={["UE","Blueprint", "Optimization"]}/></li>
 		-->	
@@ -89,10 +89,15 @@ import Socials from '../components/Socials.astro';
 		});
 
 		const url = new URL(window.location.href);
+		const tabParam = url.searchParams.get('tab');
 		const scrollTarget = url.searchParams.get('scroll') || (url.hash ? url.hash.slice(1) : null);
 
+		if (tabParam) {
+			activateTab(tabParam);
+		}
+
 		if (scrollTarget) {
-			activateTab('projects');
+			if (!tabParam) activateTab('projects');
 			window.scrollTo({ top: 0, behavior: 'auto' });
 			setTimeout(() => {
 				const targetElement = document.getElementById(scrollTarget);

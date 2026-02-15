@@ -24,17 +24,24 @@ const {
             <button data-tab={tab} class={index === 0 ? 'active' : ''}>{tab}</button>
         ))}
         </div>
-         <div class="tab-content active" id="Description">
+         <div class="tab-content active" id="Description"/>
             <div class="tab-content active" id="Description">
-            <DescriptionTemp preImageTitle=""
-            preImageDescription=""
-            image=""
-            imageSpecifier=""
-            postImageDescription=""
-            />
+            <DescriptionTemp preImageTitle="ÖH Hackathon 2024"
+            preImageDescription="This game was created during the ÖH Hackathon 2024, we had no restrictions and chose to make a unity game where the player has to ignite the flame of the olymp. We had a total of 8 members in our team."
+            image="/images/Abyss/AbyssThumb.jpg"
+            imageSpecifier="Gameplay screenshot of Echoes of the Abyss."
+            postImageDescription="On his path to the Olymp, the player is blind and can only see flames that he needs to pick up, in order to keep his flame alive. To navigate, he can activate a sonar that shows him the terrain."/>
         </div>
         <div class="tab-content" id="Gallery">
-            <GalleryTemp/>
+            <GalleryTemp title="Gallery" description ="Screenshots from Echoes of the Abyss."
+            images ={[
+                { link: "/images/Abyss/1.jpg", description: "Screenshot 1 of Echoes of the Abyss."},
+                { link: "/images/Abyss/2.jpg", description: "Screenshot 2 of Echoes of the Abyss."},
+                { link: "/images/Abyss/3.jpg", description: "Screenshot 3 of Echoes of the Abyss."},
+                { link: "/images/Abyss/4.jpg", description: "Screenshot 4 of Echoes of the Abyss."},
+                { link: "/images/Abyss/5.jpg", description: "Screenshot 5 of Echoes of the Abyss."},
+                { link: "/images/Abyss/AbyssThumb.jpg", description: "Screenshot 6 of Echoes of the Abyss."}
+            ]}/>
             </div>
     </div>
     <Socials/>

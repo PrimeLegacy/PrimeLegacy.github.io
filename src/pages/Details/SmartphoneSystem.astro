@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import DescriptionTemp from '../../components/DescriptionTemp.astro';
+import Socials from '../../components/Socials.astro';
+// Variables
+
+const {
+    title = "Smartphone System",
+    tabs = ["Description"]
+} = Astro.props;
+---
+
+<Layout title = {title}>
+</Layout>
+
+<body>
+    <Sidebar weblink ="/"/>
+    <div class="tab">
+        <h2 style="margin-left: 16px;">{title}</h2>
+        <div class="tab-buttons">
+        {tabs.map((tab: string, index: number) => (
+            <button data-tab={tab} class={index === 0 ? 'active' : ''}>{tab}</button>
+        ))}
+        </div>
+        <div class="tab-content active" id="Description">
+            <DescriptionTemp preImageTitle="Smartphone in a Game"
+            preImageDescription="A smartphone system with multiple apps and functionalities, implemented in Unreal Engine using Blueprint and CommonUI."
+            image="/images/Mechanics/Smartphone.png"
+            imageSpecifier="Smartphone UI in a game."
+            postImageDescription="The Player can access multiple functionalities through their smartphone, such as chatting with npcs or listening to and controlling music."
+            />
+        </div>
+    </div>
+    <Socials/>
+</body>
+
+<!-- JavaScript for tab functionality -->
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab-buttons button');
+		const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
+
+		tabButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				const tab = button.dataset.tab as string;
+
+				tabButtons.forEach(btn => btn.classList.remove('active'));
+				tabContents.forEach(content => content.classList.remove('active'));
+
+				button.classList.add('active');
+
+				document.getElementById(tab)?.classList.add('active');
+      		});
+    	});
+});
+</script>
