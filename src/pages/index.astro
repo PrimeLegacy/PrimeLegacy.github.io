@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Project from '../components/Project.astro';
 import Profile from '../components/Profile.astro';
 import Socials from '../components/Socials.astro';
+import ResumeePDF from '../public/images/DavidWagnerCV.pdf';
 ---
 
 
@@ -12,12 +13,12 @@ import Socials from '../components/Socials.astro';
 	<section class="intro">
 		<p class="intro-kicker">Hello, I'm David.</p>
 		<h2 class="intro-title">I program games, design mechanics and create interactive experiences.</h2>
-		<p class="intro-text"> With passion. </p>
+		<p class="intro-text"> Mainly using C++ and Blueprint.</p>
 	</section>
 <div class="tab"> 
 	<div class="tab-buttons">
 		<button data-tab="projects" class="active">Projects</button>
-		<button data-tab="mechanics">Mechanics</button>
+		<button data-tab="prototypesNsystems">Prototypes & Systems</button>
 		<button data-tab="about">About me</button> 
 	</div>
 	
@@ -35,11 +36,15 @@ import Socials from '../components/Socials.astro';
 		</ul>
 	</div>
 
-	<div class="tab-content" id="mechanics" hidden>
-		<h2>Mechanics and Systems</h2>
+	<div class="tab-content" id="prototypesNsystems" hidden>
+		<h2 id="prototypes">Prototypes</h2>
 		<ul class="projects-grid">
-			<li><Project title="Navigation Bar" description="Compass bar including markers for game UI." date="October 2025" link="/Details/NavigationBar" thumbnail="/images/Mechanics/Navigation.png" tags={["UE","C++", "Slate", "UI"]}/></li>
-			<li><Project title="Smartphone System" description="In-game smartphone UI hosting multiple functionalities." date="September 2025" link="/Details/SmartphoneSystem" thumbnail="/images/Mechanics/Smartphone.png" tags={["UE","Blueprint", "CommonUI"]}/></li>
+			<li><Project title="Paragon Fighters" description="2D Fighter prototype made in 3D space with Unreal Engine to learn animation control and improve capabilities in C++" date="May 2025" link="/Details/ParagonFighters" thumbnail="/images/PrototypesNSystems/ParagonFighter.png" tags={["UE","C++", "Animation Control", "Anim Notifier"]}/></li>
+		</ul>
+		<h2 id="systems">Systems</h2>
+		<ul class="projects-grid">
+			<li><Project title="Navigation Bar" description="Compass bar including markers for game UI." date="October 2025" link="/Details/NavigationBar" thumbnail="/images/PrototypesNSystems/Navigation.png" tags={["UE","C++", "Slate", "UI"]}/></li>
+			<li><Project title="Smartphone System" description="In-game smartphone UI hosting multiple functionalities." date="September 2025" link="/Details/SmartphoneSystem" thumbnail="/images/PrototypesNSystems/Smartphone.png" tags={["UE","Blueprint", "CommonUI"]}/></li>
 		<!--- 
 			<li><Project title="Junk loading" description="Compartmentalization of background elements, coupled with dynamic loading and unloading." date="September 2025" link="#" tags={["UE","Blueprint", "Optimization"]}/></li>
 		-->	
@@ -49,8 +54,10 @@ import Socials from '../components/Socials.astro';
 	<div class="tab-content" id="about" hidden>
 		<h2>About Me</h2>
 		<div style="display: flex; flex-direction: column; gap: 16px;">
-				<Profile name="David Wagner" description="I am a game designer and developer with a passion for creating engaging gameplay experiences. I have experience in designing mechanics, prototyping, and coding." jobTitle="Game Programmer" image="/images/DavidWagnerProfile.png"
-				resumeImage="/images/DavidWagnerCV.png" resumeDownload="/images/DavidWagnerCV.pdf" resumeAlt="Resumee preview"/>
+				<Profile name="David Wagner" description="I am a game developer with a passion for creating engaging gameplay experiences. Boasting experience in designing mechanics, coding, prototyping and optimization." 
+				jobTitle="Game Programmer" 
+				image="/images/DavidWagnerProfile.png"
+				resumeImage="public/images/DavidWagnerCV.jpg" resumeDownload={ResumeePDF} resumeAlt="Resumee preview"/>
 			</div>
 		</div>
 	</div>

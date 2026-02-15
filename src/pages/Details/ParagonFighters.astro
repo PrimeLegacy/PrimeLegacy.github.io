@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import DescriptionTemp from '../../components/DescriptionTemp.astro';
+import Socials from '../../components/Socials.astro';
+// Variables
+
+const {
+    title = "Paragon Fighters",
+    tabs = ["Description"]
+} = Astro.props;
+---
+
+<Layout title = {title}>
+</Layout>
+
+<body>
+    <Sidebar weblink ="/" tab="prototypesNsystems" scroll="prototypes"/>
+    <div class="tab">
+        <h2 style="margin-left: 16px;">{title}</h2>
+        <div class="tab-buttons">
+        {tabs.map((tab: string, index: number) => (
+            <button data-tab={tab} class={index === 0 ? 'active' : ''}>{tab}</button>
+        ))}
+        </div>
+        <div class="tab-content active" id="Description">
+            <DescriptionTemp preImageTitle="2D Fighter Prototype"
+            preImageDescription="The prototype of a 2D fighter game implemented in Unreal Engine."
+            image="/gifs/PrototypesNSystems/ParagonFighters.gif"
+            imageSpecifier="GIF showing Paragon Fighter gameplay."
+            postImageDescription="Two players control the characters by using different input devices in a local coop setup to fight.
+            Different attack types are implemented, including a light attack combo, a heavy attack and a special attack as well as a block.
+            Hit- and Hurtboxes are attached to the characters and controlled through animation notifiers, together with SFX and VFX to control timeframes of attacks.
+            Whenever a character gets hit, its action get interrupted, this way one has to consider whether to risk an interruption for more damage or to go for the fast attack."
+            />
+        </div>
+    </div>
+    <Socials/>
+</body>
+
+<!-- JavaScript for tab functionality -->
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab-buttons button');
+		const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
+
+		tabButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				const tab = button.dataset.tab as string;
+
+				tabButtons.forEach(btn => btn.classList.remove('active'));
+				tabContents.forEach(content => content.classList.remove('active'));
+
+				button.classList.add('active');
+
+				document.getElementById(tab)?.classList.add('active');
+      		});
+    	});
+});
+</script>

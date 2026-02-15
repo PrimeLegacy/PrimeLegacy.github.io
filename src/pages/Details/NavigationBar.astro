@@ -15,7 +15,7 @@ const {
 </Layout>
 
 <body>
-    <Sidebar weblink ="/" tab="mechanics"/>
+    <Sidebar weblink ="/" tab="prototypesNsystems" scroll="systems"/>
     <div class="tab">
         <h2 style="margin-left: 16px;">{title}</h2>
         <div class="tab-buttons">
@@ -26,7 +26,7 @@ const {
         <div class="tab-content active" id="Description">
             <DescriptionTemp preImageTitle="Compass and Markers"
             preImageDescription="A compass bar made in Unreal Engine using C++ and Slate, extended by additional marker functionality."
-            image="/images/Mechanics/Navigation.png"
+            image="/images/PrototypesNSystems/Navigation.png"
             imageSpecifier="Navigation bar and markers in-editor view."
             postImageDescription="The UI element has been fully implemented in C++ using Slate, making it highly performant. It communicates with the player blueprint and runtime instances of objects with an target-actor component on them. 
             The communication passes through a UMG Widgetwrapper class, forward variables like settings in-editor and positions runtime to the slate widget.
