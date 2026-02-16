@@ -32,6 +32,7 @@ images = [] } = Astro.props;
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="gallery-content">
+            <div class="gallery-loader" data-gallery-loader aria-hidden="true"></div>
             <img src="" alt="" data-gallery-image decoding="async" fetchpriority="high" style="object-fit: contain; aspect-ratio: auto; width: 100%; height: auto;" />
             <p class="gallery-caption" data-gallery-caption></p>
         </div>
@@ -52,12 +53,14 @@ images = [] } = Astro.props;
         const closeBtn = overlay.querySelector<HTMLButtonElement>('.gallery-close');
         const prevBtn = overlay.querySelector<HTMLButtonElement>('.gallery-prev');
         const nextBtn = overlay.querySelector<HTMLButtonElement>('.gallery-next');
+        const loader = overlay.querySelector<HTMLElement>('[data-gallery-loader]');
         
-        if (!img || !caption || !closeBtn || !prevBtn || !nextBtn) return;
+        if (!img || !caption || !closeBtn || !prevBtn || !nextBtn || !loader) return;
         
         const data = Array.from(gallery.querySelectorAll<HTMLButtonElement>('.gallery-element')).map(btn => {
             const i = btn.querySelector('img');
-            return { src: i?.src || '', alt: i?.alt || '' };
+            const src = i?.getAttribute('src') || i?.src || '';
+            return { src, alt: i?.alt || '' };
         });
         
         const imageCache = new Map<string, HTMLImageElement>();
@@ -69,11 +72,42 @@ images = [] } = Astro.props;
         };
         
         let idx = 0;
+        let loadToken = 0;
         const show = (i: number) => {
             idx = (i + data.length) % data.length;
-            img.src = data[idx].src;
-            img.alt = caption.textContent = data[idx].alt;
+            const target = data[idx];
+            const token = ++loadToken;
+
+            img.classList.add('is-loading');
+            img.classList.remove('is-error');
+            loader.hidden = false;
+            img.removeAttribute('src');
+            img.alt = caption.textContent = target.alt;
             prevBtn.disabled = nextBtn.disabled = data.length <= 1;
+
+            if (!target.src) {
+                img.classList.add('is-error');
+                img.classList.remove('is-loading');
+                loader.hidden = true;
+                return;
+            }
+
+            const preImg = new Image();
+            preImg.onload = () => {
+                if (token !== loadToken) return;
+                img.src = target.src;
+                img.classList.remove('is-loading');
+                loader.hidden = true;
+            };
+            preImg.onerror = () => {
+                if (token !== loadToken) return;
+                img.removeAttribute('src');
+                img.classList.add('is-error');
+                img.classList.remove('is-loading');
+                loader.hidden = true;
+            };
+            preImg.src = target.src;
+
             preloadImage(data[(idx + 1) % data.length].src);
             preloadImage(data[(idx - 1 + data.length) % data.length].src);
         };
@@ -162,6 +196,17 @@ images = [] } = Astro.props;
         gap: 12px;
         max-width: min(1200px, 80vw);
         max-height: 85vh;
+        align-items: center;
+    }
+
+    .gallery-loader {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 3px solid rgba(203, 213, 225, 0.25);
+        border-top-color: #e2e8f0;
+        animation: gallery-spin 0.9s linear infinite;
+        margin: 12px 0 4px;
     }
     
     .gallery-content img {
@@ -173,6 +218,22 @@ images = [] } = Astro.props;
         height: auto;
         border-radius: 12px;
         border: 1px solid #2a3142;
+        transition: opacity 0.2s ease;
+        background: transparent;
+    }
+
+    .gallery-content img.is-loading {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .gallery-content img.is-error {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    @keyframes gallery-spin {
+        to { transform: rotate(360deg); }
     }
     
     .gallery-caption {
