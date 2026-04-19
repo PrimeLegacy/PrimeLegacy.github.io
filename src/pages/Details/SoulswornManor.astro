@@ -42,10 +42,17 @@ const {
             postImageDescription="To ensure scalability, a interface was used to implement the interaction system. A interactionbox is attached to the player, whenever an object that implements the interface enters the box, it will be stored in an actor array. On leaving, it is removed again. When the player presses the interact button, the interface interact function is called on all actors within the array."
             />
             <DescriptionTemp preImageTitle="AI (State Tree)"
-            preImageDescription="The questing beast's behaviour is programmed using Unreal Engine's State Tree system. It has 3 general states: Patrol, Hunt and Rage."
+            preImageDescription="The questing beast's behaviour is programmed using Unreal Engine's State Tree system. It switches between three states: Patrol, Hunt and Rage."
             image="/gifs/SWM/AI - Hunt_Final.gif"
             imageSpecifier="GIF showing how the AI hunts down the player."
-            postImageDescription="The AI can open and close doors when patrolling. While in hunt or rage mode, it will break them instead. This however stalls it for a short moment. Once the player collects all 5 souls, the AI automatically enters rage mode, and is not only faster, but also knows his position at all times."
+            postImageDescription="The AI can open and close doors when patrolling. While in hunt or rage mode, it will break them instead. This however stalls it for a short moment. Once the player collects all 5 souls, the AI automatically enters rage mode, and is not only faster, but also knows his position at all times. The AI can perceive the player by sight and sound, noise is only triggered on movement, while the player is visible as long as he is within the AIs line of sight and not hidden behind an obstacle. When the AI looses sight of the players, it patrols the area, he was last seen in for a moment after losing sight of him. Afterwards it then returns back to its patrol routine."
+            />
+            <DescriptionTemp preImageTitle="Pathfinding / Navigation"
+            preImageDescription="The AI uses Unreal Engine's navigation system to find paths through the level to its respective patrol points and the players position.
+            It allows the AI to dynamically adapt its path based on changes in the environment. An example of this are the doors, they are a bit special: when they are closed, they do not influence the Navigation, once open however, they do. This prevents the AI from being stuck by walking against an open door that did not get registered as an hindrance to its path - for this to work, the NavMesh had to be set to dynamic."
+            postImageDescription="For the AI perception, Unreal Engine's perception component has been used. It worked out of the box and registered the player either by sight or by sound as target, and triggered changes in the State Tree behaviour - starting and ending the Hunt state and its behaviour for example."
+            image ="",
+            imageSpecifier=""
             />
             <DescriptionTemp preImageTitle="Random Item Distribution"
             preImageDescription="Multiple Spawn locations for the collectable souls are pre-defined in the level. A Spawn controller assigns the actual collectables randomly among them."

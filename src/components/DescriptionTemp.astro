@@ -11,23 +11,24 @@ const {
 <div class="description">
     <h3>{preImageTitle}</h3>
     <p class="preImageDescription">{preImageDescription}</p>
-    {image.endsWith('.gif') ? (
-        <img class="description-image" 
-             src={image} 
-             alt={preImageTitle}
-             loading="lazy" 
-             decoding="async"
-             fetchpriority="low"
-             style="aspect-ratio: auto; max-width: 100%; height: auto; display: block;" />
-    ) : (
-        <img class="description-image" 
-             src={image} 
-             alt={preImageTitle}
-             loading="lazy" 
-             decoding="async"
-             fetchpriority="low"
-             style="aspect-ratio: auto; max-width: 100%; height: auto; display: block;" />
-    )}
+    {image != "" && 
+        (image.endsWith('.gif') ? (
+            <img class="description-image" 
+                src={image} 
+                alt={preImageTitle}
+                loading="lazy" 
+                decoding="async"
+                fetchpriority="low"
+                style="aspect-ratio: auto; max-width: 100%; height: auto; display: block;" />
+        ) : (
+            <img class="description-image" 
+                src={image} 
+                alt={preImageTitle}
+                loading="lazy" 
+                decoding="async"
+                fetchpriority="low"
+                style="aspect-ratio: auto; max-width: 100%; height: auto; display: block;" />
+    ))}
     <p class="imageSpecifier">{imageSpecifier}</p>
     <p class="postImageDescription">{postImageDescription}</p>
 </div>
