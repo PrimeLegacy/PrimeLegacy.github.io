@@ -10,9 +10,14 @@ import Socials from '../components/Socials.astro';
 <Layout title = "Portfolio">
 </Layout>
 	<section class="intro">
-		<p class="intro-kicker">Hello, I'm David.</p>
-		<h2 class="intro-title">I program games, design mechanics and create interactive experiences.</h2>
-		<p class="intro-text"> Mainly using C++ and Blueprint.</p>
+		<h2 class="intro-kicker">Hello, I am David Wagner.</h2>
+		<h2 class="intro-title">I program games, explore mechanics and shape immersive experiences.</h2>
+		<p class="intro-followup"> 
+		As a Gameplay Programmer, I am specialized in development with <span style="font-weight: bold">Unreal Engine</span>, utilizing <span style="font-weight: bold">Blueprint</span> and <span style="font-weight: bold">C++</span>.
+		 <span style="font-weight: bold">Clean Code</span>, 
+		 <span style="font-weight: bold">Scalability</span> and 
+		 <span style="font-weight: bold">Player Satisfaction</span> are my core values.</p>
+
 	</section>
 <div class="tab"> 
 	<div class="tab-buttons">
@@ -53,10 +58,21 @@ import Socials from '../components/Socials.astro';
 	<div class="tab-content" id="about" hidden>
 		<h2>About Me</h2>
 		<div style="display: flex; flex-direction: column; gap: 16px;">
-				<Profile name="David Wagner" description="I am a game developer with a passion for creating engaging gameplay experiences. Boasting experience in designing mechanics, coding, prototyping and optimization." 
-				jobTitle="Game Programmer" 
+				<Profile name="David Wagner", 
+				jobTitle="Game Programmer",
+				description={[
+				"I develop games since 2023, starting with Unity. In 2024, i found Unreal Engine for myself and have been specializing in it ever since.",
+				"During these years I have gradually built a foundation of knowledge and participated in multiple projects as well as in the production of an unanounced title.",
+				"My focus lies in gameplay programming, with a particular interest in multiplayer and scalable game systems.",
+				"I enjoy working with others that share the same passion and I am happy to help my colleagues by sharing my knowledge, while in turn also learning from them." 
+				]}
+				
 				image="/images/DavidWagnerProfile.png"
-				resumeImage="/images/DavidWagnerCV.jpg" resumeDownload="/images/DavidWagnerCV.pdf" resumeAlt="Resumee preview"/>
+				resumeImage="/images/DavidWagnerCV.jpg" resumeDownload="/images/DavidWagnerCV.pdf" resumeAlt="Resumee preview",
+				engines ={["Unreal Engine 5", "Unity", "Godot"]},
+				skills={["Multiplayer Programming", "Slate", "Animation Control", "State Tree AI", "Common UI", "PCG", "Save Games", "Version Control", "Optimization",]},
+				languages={["Blueprint","C++", "C#", "GDScript", "HTML", "CSS", ]},
+				softskills={["Teamwork", "Communication", "Problem Solving", "Attention to Detail", "Fast learning", "Adaptability", ]}/>
 			</div>
 		</div>
 	</div>
@@ -64,11 +80,24 @@ import Socials from '../components/Socials.astro';
 
 <!-- JavaScript for tab functionality -->
 <script>
+
 	document.addEventListener('DOMContentLoaded', () => {
 		const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab-buttons button');
 		const tabContents = document.querySelectorAll<HTMLElement>('.tab-content');
 
-		const activateTab = (tabId: string) => {
+		const getTabFromUrl = () => {
+			const url = new URL(window.location.href);
+			return url.searchParams.get('tab') || 'projects';
+		};
+
+		const updateUrl = (tabId: string) => {
+			const url = new URL(window.location.href);
+			url.searchParams.set('tab', tabId);
+			url.searchParams.delete('scroll');
+			window.history.pushState({ tab: tabId }, '', url.toString());
+		};
+
+		const activateTab = (tabId: string, syncUrl = true) => {
 			tabButtons.forEach(btn => btn.classList.remove('active'));
 			tabContents.forEach(content => {
 				content.classList.remove('active');
@@ -85,6 +114,10 @@ import Socials from '../components/Socials.astro';
 				activeContent.classList.add('active');
 				activeContent.hidden = false;
 			}
+
+			if (syncUrl) {
+				updateUrl(tabId);
+			}
 		};
 
 		tabButtons.forEach(button => {
@@ -97,13 +130,16 @@ import Socials from '../components/Socials.astro';
 		const url = new URL(window.location.href);
 		const tabParam = url.searchParams.get('tab');
 		const scrollTarget = url.searchParams.get('scroll') || (url.hash ? url.hash.slice(1) : null);
+		const initialTab = tabParam || 'projects';
 
 		if (tabParam) {
-			activateTab(tabParam);
+			activateTab(tabParam, false);
+		} else {
+			activateTab(initialTab, false);
 		}
 
 		if (scrollTarget) {
-			if (!tabParam) activateTab('projects');
+			if (!tabParam) activateTab(initialTab, false);
 			window.scrollTo({ top: 0, behavior: 'auto' });
 			setTimeout(() => {
 				const targetElement = document.getElementById(scrollTarget);
@@ -112,5 +148,9 @@ import Socials from '../components/Socials.astro';
 				}
 			}, 80);
 		}
+
+		window.addEventListener('popstate', () => {
+			activateTab(getTabFromUrl(), false);
+		});
 	});
 </script>

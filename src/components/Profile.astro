@@ -1,13 +1,17 @@
 ---
+
 const {
     name = "Name",
-    description = "Description",
+    description = ["Description"],
     jobTitle = "Job Title",
     image = "path/to/image.jpg",
     resumeImage = "path/to/Resumee.jpg",
     resumeDownload = "path/to/Resumee.pdf",
     resumeAlt = "Resumee preview",
-    skills = []
+    skills = [],
+    languages = [],
+    engines = [],
+    softskills = []
 } = Astro.props;
 ---
 
@@ -20,12 +24,34 @@ const {
                 <p class="profile-role">{jobTitle}</p>
             </div>
         </div>
-        <p class="profile-description">{description}</p>
+        <div class="profile-description">{description.length > 0 &&
+        description.map((desc: string) => <p>{desc}</p>)}</div>
+            {engines.length > 0 &&
+            <h3>Game Engines</h3>}
+            <div class="tags">
+                {engines.map((eng: string) => (
+                    <span class="tag">{eng}</span>
+                ))}
+        </div>
+        {languages.length > 0 &&
+        <h3>Programming Languages</h3>}
+        <div class="tags">
+            {languages.map((language: string) => (
+                <span class="tag">{language}</span>
+            ))}
+        </div>
         {skills.length > 0 &&
-        <h3>Skills</h3>}
-        <div class="skills">
+        <h3>Competences</h3>}
+        <div class="tags">
             {skills.map((skill: string) => (
-                <span class="skill">{skill}</span>
+                <span class="tag">{skill}</span>
+            ))}
+        </div>
+        {softskills.length > 0 &&
+        <h3>Soft Skills</h3>}
+        <div class="tags">
+            {softskills.map((skill: string) => (
+                <span class="tag">{skill}</span>
             ))}
         </div>
     </div>
@@ -132,13 +158,13 @@ const {
     max-width: 60ch;
 }
 
-.skills {
+.tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-.skill {
+.tag {
     background-color: #1e232e;
     color: #f3f4f6;
     padding: 4px 8px;
