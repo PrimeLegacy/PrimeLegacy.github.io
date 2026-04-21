@@ -1,4 +1,16 @@
+:root{
+    --backgroundcolor-primary: #221f2c; /* Negative pattern*/
+    --backgroundcolor-secondary: #2d293a; /* Colored pattern */
 
+    --default-text-color: #ced1d3;
+}
+
+/* 
+Color palette: (may be subject to change and does not cover all colors in use)
+#ced1d3
+#2d293a
+#1a1f2a
+*/
 @font-face {
     font-family: 'inter';
     src: url('/fonts/Inter-VariableFont_opsz,wght.ttf');
@@ -24,7 +36,7 @@ h1{
     font-family: 'inter', sans-serif;
     font-size: 3rem;
     font-weight: bold;
-    color: #f3f4f6;
+    color: var(--default-text-color);
 }
 h2{
     font-family: 'Quantico-Regular', sans-serif;
@@ -40,7 +52,7 @@ h3{
 p{
     font-family: 'inter';
     font-size: 1rem;
-    color: #cbcccf;
+    color: var(--default-text-color);
 }
 
 li{
@@ -67,6 +79,63 @@ button{
     color: #aab2c5;
     z-index: 10;
 }
+body{
+    background-color: var(--backgroundcolor-secondary);
+    color: var(--default-text-color);
+}
+
+/* Background - patterns */
+.pattern-default{
+    background-color: var(--backgroundcolor-primary); 
+    color: var(--default-text-color);
+	background-image: linear-gradient(45deg, var(--backgroundcolor-secondary) 25%, transparent 25%, transparent 75%, var(--backgroundcolor-secondary) 75%, var(--backgroundcolor-secondary)),
+	linear-gradient(45deg, var(--backgroundcolor-secondary) 25%, transparent 25%, transparent 75%, var(--backgroundcolor-secondary) 75%, var(--backgroundcolor-secondary));
+	background-size: 60px 60px;
+	background-position:  0 0, 10px 10px;
+}
+
+.pattern-grid {
+    background-color: var(--backgroundcolor-primary);
+    background-image: 
+        linear-gradient(var(--backgroundcolor-secondary) 1px, transparent 3px),
+        linear-gradient(90deg, var(--backgroundcolor-secondary) 1px, transparent 3px);
+    background-size: 50px 50px;
+}
+
+.pattern-dots {
+    background-color: var(--backgroundcolor-secondary);
+    background-image: radial-gradient(var(--backgroundcolor-primary) 69%, transparent 75%);
+    background-size: 50px 50px;
+}
+
+.pattern-gingham {
+  background-color: var (--backgroundcolor-secondary);
+  background-image: 
+    linear-gradient(90deg, var(--backgroundcolor-primary) 50%, transparent 50%),
+    linear-gradient(var(--backgroundcolor-primary) 50%, transparent 50%);
+  background-size: 50px 50px;
+}
+
+.pattern-stripes {
+    background: repeating-linear-gradient(
+        45deg,
+        var(--backgroundcolor-primary),
+        var(--backgroundcolor-primary) 20px,
+        var(--backgroundcolor-secondary) 30px, 
+        var(--backgroundcolor-secondary) 30px
+    );
+}
+
+.pattern-chevron {
+   background: 
+    linear-gradient(135deg, var(--backgroundcolor-primary) 25%, transparent 25%) -50px 0px,
+    linear-gradient(225deg, var(--backgroundcolor-primary) 25%, transparent 25%) -50px 0px,
+    linear-gradient(315deg, var(--backgroundcolor-primary) 25%, transparent 25%),
+    linear-gradient(45deg, var(--backgroundcolor-primary) 25%, transparent 25%);
+  background-size: 100px 100px;
+  background-color: var(--backgroundcolor-secondary); 
+}
+
 .Quantico{
     font-family: 'Quantico-Regular';
 }
@@ -187,10 +256,10 @@ button{
 
 .intro-title{
     margin: 0 0 0px;
-    color: #f3f4f6;
+    color: var(--default-text-color);
     padding-top: 0px;
-    border-top: 1px solid #ffffff;
-    border-image: linear-gradient(to left, transparent, #ffffff) 1;
+    border-top: 1px solid var(--default-text-color);
+    border-image: linear-gradient(to left, transparent, var(--default-text-color)) 1;
 }
 
 .intro-text{
@@ -203,8 +272,6 @@ button{
     line-height: 2.5;
     font-size: 0.8rem;
     margin-top: 12px;
-
-   /* border-image: linear-gradient(to right, transparent, #ffffff, transparent) 1; */
 }
 
 .imageSpecifier {
